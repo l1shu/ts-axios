@@ -41,4 +41,6 @@ function transformResponseData (res: AxiosResponse): AxiosResponse {
   return res;
 }
 
+export * from './types';
+
 export default axios;
