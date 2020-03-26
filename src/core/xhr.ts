@@ -1,6 +1,6 @@
-import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
-import { parseHeaders } from './helpers/headers';
-import { createError } from './helpers/error';
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types/index';
+import { parseHeaders } from '../helpers/headers';
+import { createError } from '../helpers/error';
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -8,7 +8,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
     const request = new XMLHttpRequest();
 
-    request.open(method.toUpperCase(), url, true);
+    request.open(method.toUpperCase(), url!, true);
     
     // MDN说responseType要在open之后send之前设置，虽然试过放在open之前也是可以的。。
     if (responseType) {
