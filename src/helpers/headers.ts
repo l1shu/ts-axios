@@ -1,5 +1,5 @@
-import { isPlainObject } from './util';
-import { head } from 'shelljs';
+import { isPlainObject, deepMerge } from './util';
+import { Method } from '../types';
 
 function normalizeHeaderName(headers: any, normalizedName: string): void {
   if (!headers) {
@@ -27,6 +27,10 @@ export function processHeaders(headers: any, data: any): any {
   return headers;
 }
 
+/**
+ * 将响应的字符串headers解析成对象
+ * @param headers 响应头的headers
+ */
 export function parseHeaders(headers: string): any {
   let parsed = Object.create(null);
   if (!headers) {
@@ -46,4 +50,26 @@ export function parseHeaders(headers: string): any {
   });
 
   return parsed;
+}
+
+/**
+ * 将复杂对象 headers 中的 common、post、get 等属性压成一级
+ * @param headers 
+ * @param method 
+ */
+export function flattenHeaders(headers: any, method: Method) {
+  if (!headers) {
+    return;
+  }
+  headers = deepMerge(headers.common || {}, headers[method] || {}, headers);
+
+  // todo method大小写
+  const methodsToDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common'];
+  methodsToDelete.forEach(method => {
+    if (headers[method]) {
+      delete headers[method];
+    }
+  });
+
+  return headers;
 }
