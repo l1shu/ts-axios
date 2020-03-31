@@ -1,4 +1,6 @@
 import { AxiosRequestConfig } from './types';
+import { transformRequest, transformResponse } from './helpers/data';
+import { processHeaders } from './helpers/headers';
 
 const defaults: AxiosRequestConfig = {
   method: 'get',
@@ -9,7 +11,22 @@ const defaults: AxiosRequestConfig = {
     common: {
       Accept: 'application/json, text/plain, */*'
     }
-  }
+  },
+
+  // 默认的转换请求数据函数
+  transformRequest: [
+    function(data: any, headers: any): any {
+      processHeaders(headers, data);
+      return transformRequest(data);
+    }
+  ],
+
+  // 默认的转换响应数据函数
+  transformResponse: [
+    function(data: any): any {
+      return transformResponse(data);
+    }
+  ]
 }
 
 const methodsNoData = ['delete', 'get', 'head', 'options'];

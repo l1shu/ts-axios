@@ -12,7 +12,7 @@ export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {
 
 export interface Axios {
   defaults: AxiosRequestConfig;
-  
+
   interceptors: {
     request: AxiosInterceptorManager<AxiosRequestConfig>
     response: AxiosInterceptorManager<AxiosResponse>
@@ -53,8 +53,10 @@ export interface AxiosRequestConfig {
   headers?: any;
   responseType?: XMLHttpRequestResponseType;
   timeout?: number;
+  transformRequest?: AxiosTransformer | AxiosTransformer[];
+  transformResponse?: AxiosTransformer | AxiosTransformer[]
 
-  [param: string]: any;
+  [propName: string]: any;
 }
 
 export type Method =
@@ -100,4 +102,8 @@ export interface AxiosInterceptorManager<T> {
   eject(id: number): void;
 
   forEach(fn: (interceptor: Interceptor<T>) => void): void;
+}
+
+export interface AxiosTransformer {
+  (data: any, headers?: any): any
 }

@@ -1,7 +1,8 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosStatic } from './types';
+import { AxiosRequestConfig, AxiosStatic } from './types';
 import Axios from './core/Axios';
 import { extend } from './helpers/util';
 import defaults from './defaults';
+import mergeConfig from './core/mergeConfig';
 
 function createInstance(config: AxiosRequestConfig): AxiosStatic {
   const context = new Axios(config);
@@ -15,6 +16,14 @@ function createInstance(config: AxiosRequestConfig): AxiosStatic {
 }
 
 const axios = createInstance(defaults);
+
+/**
+ * axios 默认是一个单例，一旦我们修改了 axios 的默认配置，会影响所有的请求。
+ * axios.create 的静态接口允许我们创建一个新的 axios 实例，同时允许我们传入新的配置和默认配置合并，并做为新的默认配置。
+ */
+axios.create = function(config) {
+  return createInstance(mergeConfig(defaults, config));
+}
 
 export * from './types';
 
