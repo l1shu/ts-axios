@@ -38,6 +38,8 @@ registerInterceptorRouter()
 
 registerConfigRouter()
 
+registerCancerRouter()
+
 app.use(router)
 
 const port = process.env.PORT || 8080
@@ -148,6 +150,16 @@ function registerInterceptorRouter() {
 
 function registerConfigRouter() {
   router.post('/config/post', function(req, res) {
+    console.log(req.body);
+    res.json(req.body)
+  })
+}
+
+function registerCancerRouter() {
+  router.get('/cancel/get', function(req, res) {
+    res.end('hello')
+  })
+  router.post('/cancel/post', function(req, res) {
     console.log(req.body);
     res.json(req.body)
   })
