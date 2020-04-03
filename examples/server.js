@@ -18,7 +18,11 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler))
 
-app.use(express.static(__dirname))
+app.use(express.static(__dirname, {
+  setHeaders(res) {
+    res.cookie('XSRF-TOKEN-D', '1234abc');
+  }
+}))
 
 app.use(bodyParser.json())
 // app.use(bodyParser.text())
@@ -39,6 +43,8 @@ registerInterceptorRouter()
 registerConfigRouter()
 
 registerCancerRouter()
+
+registerMoreRouter()
 
 app.use(router)
 
@@ -165,3 +171,9 @@ function registerCancerRouter() {
   })
 }
 
+function registerMoreRouter() {
+  router.get('/more/get', function(req, res) {
+    console.log(req.headers);
+    res.end(req.headers['XSRF-TOKEN-D']);
+  })
+}
