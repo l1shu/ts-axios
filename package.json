@@ -125,6 +125,9 @@
     "body-parser": "^1.18.3"
   },
   "dependencies": {
-    "cookie-parser": "^1.4.5"
+    "connect-multiparty": "^2.2.0",
+    "cookie-parser": "^1.4.5",
+    "css-loader": "^3.4.2",
+    "nprogress": "^0.2.0"
   }
 }
