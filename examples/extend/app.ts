@@ -59,7 +59,7 @@ interface User {
 function getUser<T>() {
   return axios<ResponseData<T>>('/extend/user')
     .then(res => res.data)
-    .catch(err => console.error(err))
+    // .catch(err => console.error(err))
 }
 
 

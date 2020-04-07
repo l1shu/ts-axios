@@ -38,14 +38,13 @@ export function parseHeaders(headers: string): any {
   }
 
   headers.split('\r\n').forEach(line => {
-    let [key, value] = line.split(':');
+    // 需要考虑value也包含：的场景，比如 Date: Tue, 21 May 2019 09:23:44 GMT
+    let [key, ...vals] = line.split(':');
     key = key.trim().toLowerCase();
     if (!key) {
       return;
     }
-    if (value) {
-      value = value.trim();
-    }
+    let value = vals.join(':').trim();
     parsed[key] = value;
   });
 
@@ -63,7 +62,6 @@ export function flattenHeaders(headers: any, method: Method) {
   }
   headers = deepMerge(headers.common || {}, headers[method] || {}, headers);
 
-  // todo method大小写
   const methodsToDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common'];
   methodsToDelete.forEach(method => {
     if (headers[method]) {

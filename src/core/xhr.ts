@@ -10,8 +10,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 		const {
 			data = null,
 			url,
-			method = 'get',
-			headers,
+			method,
+			headers = {},
 			responseType,
 			timeout,
 			cancelToken,
@@ -26,7 +26,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
 		const request = new XMLHttpRequest();
 
-		request.open(method.toUpperCase(), url!, true);
+		request.open(method!.toUpperCase(), url!, true);
 
 		configureRequest();
 
@@ -69,7 +69,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 				}
 	
 				const responseHeaders = parseHeaders(request.getAllResponseHeaders());
-				const responseData = responseType && responseType === 'text' ? request.responseText : request.response;
+				const responseData = (!responseType || responseType === 'text') ? request.responseText : request.response;
 				const response: AxiosResponse = {
 					data: responseData,
 					status: request.status,

@@ -1,5 +1,6 @@
 import { AxiosRequestConfig, AxiosResponse } from '../types';
 
+/* istanbul ignore next */
 export class AxiosError extends Error {
   isAxiosError: boolean;
   config: AxiosRequestConfig;

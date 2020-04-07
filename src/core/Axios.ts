@@ -37,6 +37,14 @@ export default class Axios {
 
     config = mergeConfig(this.defaults, config);
 
+    if (config.method) {
+      config.method = config.method.toLowerCase();
+    } else if (this.defaults.method) {
+      config.method = this.defaults.method.toLowerCase();
+    } else {
+      config.method = 'get';
+    }
+
     const chain: PromiseChain<any>[] = [{
       resolved: dispatchRequest,
       rejected: undefined

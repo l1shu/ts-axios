@@ -3,8 +3,7 @@ import { transformRequest, transformResponse } from './helpers/data';
 import { processHeaders } from './helpers/headers';
 
 const defaults: AxiosRequestConfig = {
-  method: 'get',
-
+  // A timeout in milliseconds to abort a request. If set to 0 (default) a timeout is not created.
   timeout: 0,
 
   headers: {
@@ -12,6 +11,9 @@ const defaults: AxiosRequestConfig = {
       Accept: 'application/json, text/plain, */*'
     }
   },
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
 
   // 默认的转换请求数据函数
   transformRequest: [

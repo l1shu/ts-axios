@@ -1,4 +1,5 @@
 import axios from '../../src/index'
+// import axios from 'axios';
 
 // axios({
 //   method: 'get',
@@ -103,22 +104,22 @@ import axios from '../../src/index'
 axios({
   method: 'post',
   url: '/base/post',
-  data: {
-    a: 1,
-    b: 2
+  data: {name:'l1shu'},
+  transformRequest(data) {
+    return data
   }
 }).then((res) => {
   console.log(res)
 })
 
-axios({
-  method: 'post',
-  url: '/base/post',
-  responseType: 'json',
-  data: {
-    a: 3,
-    b: 4
-  }
-}).then((res) => {
-  console.log(res)
-})
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   responseType: 'json',
+//   data: {
+//     a: 3,
+//     b: 4
+//   }
+// }).then((res) => {
+//   console.log(res)
+// })

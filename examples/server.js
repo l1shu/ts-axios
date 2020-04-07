@@ -71,7 +71,7 @@ function registerBaseRouter () {
   })
 
   router.post('/base/post', function(req, res) {
-    res.json(req.body)
+    res.end('{"error": "BAD USERNAME", "code": 1}')
   })
 
   router.post('/base/buffer', function(req, res) {
