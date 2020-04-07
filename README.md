@@ -1,17 +1,40 @@
 使用 typescript-library-starter 初始化我们的项目
 
 # 命令
-开发:
+## 开发:
+```
 node ./examples/server.js
+```
 
-文档:
+## 文档:
+```
 npm run docs
+```
 
-打包
+## 打包
+```
 npm run build
+```
+tips: 根据npm规则 运行build时会先执行'npm run prebuild'
 
-测试
+## 测试
+```
 npm run test
+```
+
+## 发布
+```
+npm run pub
+```
+tips: 根据npm规则 运行build时会先执行'npm run prepub'
+
+当我们运行 npm run pub 的时候，会优先执行 prepub 脚本，在 prepub 中我们运行了 test:prod 和 build 2 个脚本。&& 符号表示前面一个命令执行成功后才会执行后面的任务。
+
+npm run test:prod 实际上运行了 npm run lint && npm run test -- --no-cache。 先运行 lint 去校验我们的源码和测试文件是否遵循 tslint 规范，再运行 test 去跑测试。
+
+npm run build 实际上运行了 tsc --module commonjs、rollup -c rollup.config.ts 和 typedoc --out docs --target es6 --theme minimal --mode file src。先运行 tsc 去编译我们的 TypeScript 文件，dist/lib 和 dist/types 下的文件就是该命令产生的，然后运行 rollup 去构建 axios.umd.js 及 axios.es.js，最后运行 typedoc 去构建项目的文档。
+
+运行完 prepub 后就会再运行 pub 命令，实际上执行了 sh release.sh 命令
 
 # 概念
 ## webpack-hot-middleware & webpack-dev-middleware
