@@ -1,11 +1,23 @@
-文档：https://wangbin3162.gitee.io/bin-axios/chapter3/base.html
+使用 typescript-library-starter 初始化我们的项目
 
-## 概念
+# 命令
+开发:
+node ./examples/server.js
 
-# webpack-hot-middleware & webpack-dev-middleware
+文档:
+npm run docs
+
+打包
+npm run build
+
+测试
+npm run test
+
+# 概念
+## webpack-hot-middleware & webpack-dev-middleware
 两者配套使用，可参考https://juejin.im/post/5cf8a80df265da1bb67a0894
 
-# responseType 和 response
+## responseType 和 response
 在 xhr.ts 中 
 ```
 const responseData = responseType && responseType === 'text' ? request.responseText : request.response;

@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  "main": "dist/ts-axios.umd.js",
-  "module": "dist/ts-axios.es5.js",
-  "typings": "dist/types/ts-axios.d.ts",
+  "main": "dist/axios.umd.js",
+  "module": "dist/axios.es5.js",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
@@ -19,9 +19,10 @@
     "node": ">=6.0.0"
   },
   "scripts": {
+    "docs": "vuepress dev docs",
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
@@ -136,6 +137,7 @@
     "css-loader": "^3.4.2",
     "jasmine-ajax": "^4.0.0",
     "jasmine-core": "^3.5.0",
-    "nprogress": "^0.2.0"
+    "nprogress": "^0.2.0",
+    "vuepress": "^1.4.0"
   }
 }
