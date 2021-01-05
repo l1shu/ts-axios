@@ -133,7 +133,7 @@
   },
   "dependencies": {
     "@types/jasmine-ajax": "^3.3.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "connect-multiparty": "^2.2.0",
     "cookie-parser": "^1.4.5",
     "css-loader": "^3.4.2",
